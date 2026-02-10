@@ -1,0 +1,23 @@
+# Enable Rewrite Engine
+RewriteEngine On
+RewriteBase /vacatures/
+
+# Make home.php the default index
+DirectoryIndex home.php
+
+# Don't apply rules to actual files (css, js, images, fonts, etc.)
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Redirect /index to home
+RewriteRule ^index$ /vacatures/ [R=301,L]
+
+# Remove .php extension from URLs (preserve query strings)
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteRule ^(.*)$ $1.php [QSA,L]
+
+# Redirect if .php is explicitly in the URL (but exclude admin folder)
+RewriteCond %{THE_REQUEST} ^GET\ (.*)\.php\ HTTP
+RewriteCond %{REQUEST_URI} !^/vacatures/admin/
+RewriteRule (.*)\.php$ /vacatures/$1 [R=301,L]

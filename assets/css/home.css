@@ -1,0 +1,873 @@
+#intro-section {
+  z-index: 0;
+  background-image: linear-gradient(
+      0deg,
+      rgba(217, 217, 217, 0) 80%,
+      #000000 100%
+    ),
+    linear-gradient(180deg, rgba(217, 217, 217, 0) 85%, rgba(0, 0, 0, 0.9) 95%),
+    url("/vacatures/assets/img/home/homepage-banner.jpg");
+  background-size: cover;
+  background-position: center;
+  height: 150vh;
+  width: 100%;
+  max-width: 100vw;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 20%;
+  overflow: hidden;
+
+  #intro-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 1.2s ease-out;
+  }
+
+  #intro-title {
+    color: #fff;
+    font-size: 7rem;
+    font-family: "Buroto-Wide";
+    text-shadow: 0px 4px 10px rgba(0, 0, 0, 0.7);
+    margin: 0;
+    animation: fadeIn 1s ease-out 0.3s both;
+  }
+
+  #intro-desc {
+    color: #fff;
+    font-size: 35px;
+    font-family: "Buroto";
+    text-shadow: 0px 4px 10px rgba(0, 0, 0, 0.7);
+    text-align: center;
+    max-width: 70%;
+    animation: fadeIn 1s ease-out 0.5s both;
+  }
+
+  #intro-vac-btn {
+    background-color: #ff8f1c;
+    padding: 20px;
+    text-decoration: none;
+    color: #000;
+    font-size: 28px;
+    font-family: "Buroto";
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    transition: all 0.4s ease;
+    animation: fadeIn 1s ease-out 0.7s both;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #intro-vac-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.1);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s ease, height 0.6s ease;
+  }
+
+  #intro-vac-btn:hover::before {
+    width: 400px;
+    height: 400px;
+  }
+
+  #intro-vac-btn:hover {
+    background-color: #e67e22;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(255, 143, 28, 0.5);
+  }
+
+  #intro-vac-btn svg {
+    transition: transform 0.3s ease;
+  }
+
+  #intro-vac-btn:hover svg {
+    transform: translateX(10px);
+  }
+
+  #pointer-circle {
+    position: absolute;
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    animation: bounce 2s infinite;
+    transition: transform 0.3s ease;
+  }
+
+
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  40% {
+    transform: translateX(-50%) translateY(-15px);
+  }
+  60% {
+    transform: translateX(-50%) translateY(-8px);
+  }
+}
+
+#application-section {
+  position: relative;
+  z-index: 1;
+  min-height: auto;
+  width: 100%;
+  margin-top: -10%;
+  color: #fff;
+  background-color: #000;
+  border-top-right-radius: 160px;
+  border-bottom-right-radius: 160px;
+  padding-bottom: 5%;
+  overflow: hidden;
+
+  #apply-content {
+    padding-top: 3%;
+    display: flex;
+    flex-direction: column;
+    width: 65%;
+    margin: 0 auto;
+    font-family: "Buroto";
+    font-weight: normal;
+    font-size: 1.87rem;
+  }
+
+  #apply-title {
+    color: #fff;
+    font-size: 3rem;
+    font-family: "Buroto-Wide";
+    display: flex;
+    justify-content: center;
+  }
+
+  #p-loc-link {
+    color: #fff;
+  }
+
+  #p-loc-link:hover {
+    opacity: 85%;
+  }
+
+  #application-req {
+    padding-top: 2%;
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+  }
+
+  #levels-link-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    text-decoration: none;
+    color: #fff;
+    border-color: #000;
+    border: 3px solid #fff;
+    width: 520px;
+    padding: 20px;
+    margin-bottom: 20px;
+    transition: 0.1s ease-in;
+  }
+
+  #levels-link-btn:hover {
+    opacity: 70%;
+  }
+}
+
+#application2-section {
+  z-index: 0;
+  height: 150vh;
+  margin-top: 0;
+  position: relative;
+  background-image: linear-gradient(
+      180deg,
+      rgba(217, 217, 217, 0) 85%,
+      rgba(0, 0, 0, 0.9) 100%
+    ),
+    url("/vacatures/assets/img/home/app-background.jpg");
+  background-size: cover;
+  background-position: center;
+  color: #fff;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  flex-direction: column;
+  padding-right: 4%;
+  overflow: hidden;
+
+  #application2-content {
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+  }
+
+  #application2-vac-btn {
+    background-color: #ff8f1c;
+    padding: 20px;
+    text-decoration: none;
+    color: #000;
+    font-size: 33px;
+    height: 60px;
+    width: 380px;
+    font-family: "Buroto";
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    transition: 0.2s ease-in;
+  }
+
+  #application2-vac-btn:hover {
+    background-color: #e67e22;
+  }
+
+  #application2-title {
+    font-family: "Buroto";
+    font-size: 95px;
+    font-weight: 400px;
+    margin: 0;
+    padding-top: 2%;
+  }
+
+  #application2-title2 {
+    font-family: "Better-Times";
+    font-size: 180px;
+    font-weight: 400px;
+    color: #ff8f1c;
+    margin: 0;
+  }
+}
+
+#job-info-section {
+  min-height: 120vh;
+  background-color: #fff;
+  padding-bottom: 5%;
+  overflow: hidden;
+  max-width: 100vw;
+
+  #job-info-desc {
+    padding-top: 4%;
+    width: 65%;
+    margin: 0 auto;
+    font-family: "Buroto";
+    font-size: 35px;
+
+    h3 {
+      font-family: "Buroto-Wide";
+      font-size: 40px;
+      font-style: normal;
+      font-weight: normal;
+    }
+  }
+
+  #info-icons-container {
+    padding-top: 8%;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 40px;
+    padding-left: 5%;
+    padding-right: 5%;
+
+    .info-icon-container {
+      text-align: center;
+      flex: 0 1 calc(33.333% - 40px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 150px;
+
+      p {
+        font-family: "Buroto";
+        font-size: 1.5rem;
+        margin-top: 15px;
+        max-width: 200px;
+      }
+    }
+
+    .job-info-icon {
+      width: 150px;
+      height: 150px;
+    }
+  }
+}
+
+#jobs-section {
+  height: 110vh;
+  background-color: #38dda1;
+  display: flex;
+  align-items: center;
+  overflow-x: auto;
+  overflow-y: hidden;
+  max-width: 100vw;
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  scrollbar-width: 0;
+  scroll-behavior: smooth;
+
+  #jobs-slide-menu {
+    width: 100%;
+    padding-left: 3%;
+    display: flex;
+    flex-direction: row;
+    gap: 2.5%;
+    overflow: auto;
+    white-space: nowrap;
+
+    .job-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      background-color: #fff;
+      height: 72vh;
+      width: 260px;
+      min-width: 240px;
+      flex-shrink: 0;
+      padding: 20px;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .job-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 143, 28, 0.1), transparent);
+      transition: left 0.6s ease;
+    }
+
+    .job-card:hover::before {
+      left: 100%;
+    }
+
+    .job-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    .job-card:hover .job-img {
+      transform: scale(1.1);
+      filter: brightness(1.1);
+    }
+
+
+
+    .job-card:hover svg {
+      transform: translateX(10px) scale(1.1);
+      fill: #ff8f1c;
+    }
+
+      .job-img {
+        width: 220px;
+        height: 180px;
+        transition: transform 0.4s ease, filter 0.3s ease;
+        object-fit: cover;
+      }
+
+      .job-title {
+        font-family: "Buroto-Wide";
+        font-size: 1.6rem;
+        min-width: 180px;
+        min-height: 5rem;
+        white-space: initial;
+        margin: 0px;
+        margin-top: 15px;
+        transition: color 0.3s ease;
+      }
+
+      .job-availability {
+        margin: 0;
+        font-family: "Buroto";
+        font-size: 1.6rem;
+        transition: color 0.3s ease;
+      }
+
+
+
+      .job-loc {
+        font-family: "Buroto";
+        font-size: 2rem;
+        font-weight: 400;
+        width: 180px;
+        margin: 0;
+        transition: transform 0.3s ease;
+      }
+
+
+
+      .svg-pointer {
+        margin: 0;
+        height: 100px;
+      }
+
+      svg {
+        transition: transform 0.4s ease, fill 0.3s ease;
+      }
+    }
+  }
+
+#playlist-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #262a75;
+  height: 130vh;
+  overflow: hidden;
+  max-width: 100vw;
+
+  iframe {
+    width: 600px;
+    height: 80%;
+    max-width: 95%;
+  }
+}
+
+@media (min-width: 750px) and (max-width: 1000px) {
+  #intro-section {
+    height: 135vh;
+    #intro-content {
+      #intro-title {
+        font-size: 5rem;
+      }
+      #intro-desc {
+        font-size: 30px;
+      }
+    }
+  }
+
+  #application-section {
+    border-top-right-radius: 180px;
+    border-bottom-right-radius: 180px;
+    #apply-content {
+      width: 80%;
+      font-size: 1.5rem;
+
+      #apply-title {
+        font-size: 2.7rem;
+      }
+      #levels-link-btn {
+        width: 430px;
+      }
+      #levels-link-btn svg {
+        height: 5px;
+      }
+    }
+  }
+
+  #application2-section {
+    height: 125vh;
+    #application2-vac-btn {
+      font-size: 22px;
+      height: 40px;
+      width: 280px;
+
+      svg {
+        width: 71px;
+      }
+    }
+
+    #application2-title {
+      font-size: 75px;
+    }
+
+    #application2-title2 {
+      font-size: 143px;
+    }
+  }
+
+  #job-info-section {
+    min-height: 100vh;
+    
+    #job-info-desc {
+      width: 80%;
+      font-size: 1.8rem;
+
+      h3 {
+        font-size: 2.5rem;
+      }
+    }
+
+    #info-icons-container {
+      padding-top: 5%;
+      gap: 30px;
+
+      .info-icon-container {
+        flex: 0 1 calc(50% - 30px);
+        
+        p {
+          font-size: 1.3rem;
+        }
+      }
+
+      .job-info-icon {
+        width: 120px;
+        height: 120px;
+      }
+    }
+  }
+
+  #jobs-section {
+    height: 100vh;
+    #jobs-slide-menu {
+      .job-card {
+        height: 62vh;
+        width: 300px;
+        padding: 25px;
+
+        .job-img {
+          width: 220px;
+          height: 180px;
+        }
+
+        .job-title {
+          font-size: 1.6rem;
+          width: 200px;
+        }
+
+        .job-loc {
+          font-size: 2.2rem;
+          width: 200px;
+        }
+
+        svg {
+          width: 70px;
+          height: 70px;
+        }
+
+        .job-availability {
+          font-size: 1.8rem;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 481px) and (max-width: 750px) {
+  #intro-section {
+    height: 120vh;
+    #intro-content {
+      #intro-title {
+        font-size: 3.5rem;
+      }
+      #intro-desc {
+        font-size: 25px;
+      }
+      #intro-vac-btn {
+        font-size: 1.5rem;
+      }
+      #intro-vac-btn svg {
+        width: 71px;
+        height: 5px;
+      }
+    }
+    #pointer-circle {
+      top: 100%;
+    }
+  }
+
+  #application-section {
+    border-top-right-radius: 140px;
+    border-bottom-right-radius: 140px;
+    #apply-content {
+      width: 90%;
+      font-size: 1.2rem;
+      padding-bottom: 5%;
+
+      #apply-title {
+        font-size: 2rem;
+      }
+      #levels-link-btn {
+        width: 90%;
+      }
+      #levels-link-btn svg {
+        height: 5px;
+        width: 65px;
+      }
+    }
+  }
+
+  #application2-section {
+    height: 115vh;
+    #application2-vac-btn {
+      font-size: 18px;
+      height: 30px;
+      width: 240px;
+
+      svg {
+        width: 61px;
+      }
+    }
+
+    #application2-title {
+      font-size: 55px;
+    }
+
+    #application2-title2 {
+      font-size: 103px;
+    }
+  }
+
+  #job-info-section {
+    min-height: 100vh;
+    
+    #job-info-desc {
+      width: 85%;
+      font-size: 1.5rem;
+
+      h3 {
+        font-size: 2rem;
+      }
+    }
+
+    #info-icons-container {
+      padding-top: 5%;
+      gap: 25px;
+
+      .info-icon-container {
+        flex: 0 1 calc(50% - 25px);
+        
+        p {
+          font-size: 1.2rem;
+        }
+      }
+
+      .job-info-icon {
+        width: 100px;
+        height: 100px;
+      }
+    }
+  }
+
+  #jobs-section {
+    height: 100vh;
+    #jobs-slide-menu {
+      .job-card {
+        height: 60vh;
+        width: 300px;
+        padding: 25px;
+
+        .job-img {
+          width: 200px;
+          height: 180px;
+        }
+
+        .job-title {
+          font-size: 1.4rem;
+          max-width: 200px;
+        }
+
+        .job-loc {
+          font-size: 2rem;
+          width: 200px;
+        }
+
+        svg {
+          width: 60px;
+          height: 60px;
+        }
+
+        .job-availability {
+          font-size: 1.6rem;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  #intro-section {
+    height: 100vh;
+    padding-top: 30%;
+    #intro-content {
+      #intro-title {
+        font-size: 2.8rem;
+        padding: 0 5%;
+        text-align: center;
+      }
+      #intro-desc {
+        font-size: 1.3rem;
+        padding: 0 5%;
+        max-width: 90%;
+      }
+      #intro-vac-btn {
+        font-size: 1.1rem;
+        padding: 15px 20px;
+      }
+      #intro-vac-btn svg {
+        width: 61px;
+        height: 4px;
+      }
+    }
+  }
+
+  #application-section {
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    padding: 60px 0;
+    margin-top: -5%;
+    overflow: hidden;
+
+    #apply-content {
+      width: 90%;
+      font-size: 1.3rem;
+      padding-bottom: 5%;
+      line-height: 1.8;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+
+      #apply-title {
+        font-size: 2.2rem;
+        margin-bottom: 25px;
+      }
+      #levels-link-btn {
+        width: 90%;
+        gap: 10px;
+        font-size: 1.1rem;
+        padding: 15px 20px;
+      }
+      #levels-link-btn svg {
+        height: 4px;
+        width: 45px;
+      }
+    }
+  }
+
+  #application2-section {
+    height: 100vh;
+    padding: 0 5%;
+    #application2-vac-btn {
+      font-size: 1rem;
+      height: 35px;
+      width: 220px;
+      padding: 0 20px;
+
+      svg {
+        width: 51px;
+      }
+    }
+
+    #application2-title {
+      font-size: 2.8rem;
+      padding: 0 5%;
+    }
+
+    #application2-title2 {
+      font-size: 5rem;
+      padding: 0 5%;
+    }
+  }
+
+  #job-info-section {
+    min-height: 100vh;
+    
+    #job-info-desc {
+      width: 90%;
+      font-size: 1.2rem;
+
+      h3 {
+        font-size: 1.8rem;
+      }
+    }
+
+    #info-icons-container {
+      padding-top: 5%;
+      gap: 20px;
+      justify-content: center;
+
+      .info-icon-container {
+        flex: 0 1 calc(50% - 20px);
+        max-width: 150px;
+        
+        p {
+          font-size: 1rem;
+        }
+      }
+
+      .job-info-icon {
+        width: 80px;
+        height: 80px;
+      }
+    }
+  }
+
+  #jobs-section {
+    height: 90vh;
+    
+    #jobs-slide-menu {
+      padding-left: 5%;
+      gap: 5%;
+
+      .job-card {
+        height: 55vh;
+        width: 250px;
+        padding: 20px;
+
+        .job-img {
+          width: 180px;
+          height: 160px;
+        }
+
+        .job-title {
+          font-size: 1.2rem;
+          max-width: 180px;
+          min-height: 4rem;
+        }
+
+        .job-loc {
+          font-size: 1.8rem;
+          width: 180px;
+        }
+
+        svg {
+          width: 50px;
+          height: 50px;
+        }
+
+        .job-availability {
+          font-size: 1.4rem;
+        }
+      }
+    }
+  }
+
+  #playlist-section {
+    height: 100vh;
+
+    iframe {
+      width: 90%;
+      max-width: 500px;
+      height: 70%;
+    }
+  }
+}

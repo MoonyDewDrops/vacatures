@@ -1,0 +1,12 @@
+# Enable Rewrite Engine for admin folder
+RewriteEngine On
+RewriteBase /vacatures/admin/
+
+# Remove .php extension from URLs (preserve query strings)
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteRule ^(.*)$ $1.php [QSA,L]
+
+# Redirect if .php is explicitly in the URL
+RewriteCond %{THE_REQUEST} ^GET\ (.*)\.php\ HTTP
+RewriteRule (.*)\.php$ /vacatures/admin/$1 [R=301,L]
