@@ -2,8 +2,8 @@
 // Don't start session here - let pages handle it themselves
 
 $dbhost = "localhost";
-$dbuser = "bureau_vacatures";
-$dbpass = "rXSnkLxqWSVWPjSTRMMF";
+$dbuser = "root";
+$dbpass = "";
 $dbname = "bureau_vacatures";
 
 $conn = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
