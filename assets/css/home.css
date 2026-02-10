@@ -9,7 +9,7 @@
     url("/vacatures/assets/img/home/homepage-banner.jpg");
   background-size: cover;
   background-position: center;
-  height: 150vh;
+  height: 70vh;
   width: 100%;
   max-width: 100vw;
   position: relative;
@@ -19,6 +19,7 @@
   flex-direction: column;
   padding-top: 20%;
   overflow: hidden;
+  padding-bottom: 10%;
 
   #intro-content {
     display: flex;
@@ -100,6 +101,7 @@
     bottom: 10%;
     left: 50%;
     transform: translateX(-50%);
+    padding-top: 15%;
     width: 40px;
     animation: bounce 2s infinite;
     transition: transform 0.3s ease;
@@ -178,23 +180,26 @@
     gap: 35px;
   }
 
-  #levels-link-btn {
+  #levels-container{ 
     display: flex;
     justify-content: center;
-    align-items: center;
-    gap: 20px;
-    text-decoration: none;
-    color: #fff;
-    border-color: #000;
-    border: 3px solid #fff;
-    width: 520px;
-    padding: 20px;
-    margin-bottom: 20px;
-    transition: 0.1s ease-in;
-  }
+    flex-direction: row;
+    padding: 5%;
 
-  #levels-link-btn:hover {
-    opacity: 70%;
+    #levels-link-btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      text-decoration: none;
+      color: #fff;
+      border: 3px solid #fff;
+      width: 25%;
+      padding: 20px;
+      margin-bottom: 20px;
+      margin-left: 5%;
+      transition: 0.1s ease-in;
+    }
   }
 }
 

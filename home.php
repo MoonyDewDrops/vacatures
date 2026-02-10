@@ -30,7 +30,7 @@ curl_close($curl);
     <main>
 
         <section id="intro-section">
-            <div id="intro-content">
+            <div id="intro-content" style="margin-top: -10%;">
                 <h1 id="intro-title">Join the club!</h1>
                 <p id="intro-desc">Je zult een leuke, leerzame en enthousiaste werkplek krijgen bij ons!</p>
                 <a id="intro-vac-btn" href="#jobs-section">
@@ -42,11 +42,12 @@ curl_close($curl);
             </div>
             <img id="pointer-circle" src="/vacatures/assets/img/home/test.png" alt="test">
         </section>
+<br><br>
 
         <section id="application-section">
             <div id="apply-content">
                 <h2 id="apply-title">Sollicitatie Procedure</h2>
-                <p>Nu vraag je jezelf waarschijnlijk af; <a id="p-loc-link" href="#">HOE kom ik bij het Bureau?</a>
+                <p>Nu vraag je jezelf waarschijnlijk af; HOE kom ik bij het Bureau?
                     Allereerst vragen wij om te
                     solliciteren op 1 van de vacatures die hieronder zijn te vinden. Hiervoor heb je in ieder geval het
                     volgende nodig:</p>
@@ -55,13 +56,27 @@ curl_close($curl);
                     <li>Curriculum Vitea (C.V.)</li>
                     <li>Een portfolio met eigen werk</li>
                 </ul>
+                <br>
                 <p>Bij het starten van Het Bureau zit je in een bepaald Level.</p>
-                <a id="levels-link-btn" href="#">
+            
+                <div id="levels-container">
+                  <a id="levels-link-btn" style="border-color:#9B534D">
+                    <p>Junior</p>
+                  </a> <br>
+                  <a id="levels-link-btn" style="border-color:#3F6F54">
+                    <p>Medior</p>
+                  </a>
+                  <a id="levels-link-btn" style="border-color:#755B48">
+                    <p>Senior</p>
+                  </a>
+                </div>
+
+                <!-- <a id="levels-link-btn" href="#">
                     Lees hier over verdere levels!
                     <svg width="91" height="6" viewBox="0 0 91 6" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M0 3H91" stroke="white" stroke-width="5" />
                     </svg>
-                </a>
+                </a> -->
                 <p>Nadat je je sollicitatie in orde hebt gemaakt ga je werken aan een ON-BOARDING opdracht in een groep.
                     Deze opdracht zal door de coaches van Het Bureau worden toegewezen.</p>
                 <p>Deze opdracht kan 2 a 3 weken (1 dag per week) duren.</p>
@@ -157,10 +172,10 @@ curl_close($curl);
                 <?php 
                 // Get jobs from database
                 require_once 'db_connect.php';
-                $result = $conn->query("SELECT * FROM bureau_vacatures ORDER BY id DESC LIMIT 6");
+                $result = $conn->query("SELECT * FROM bureau_vacatures ORDER BY id");
                 
                 if ($result && $result->num_rows > 0) {
-                    while ($job = $result->fetch_assoc()) {
+                    foreach ($result->fetch_all(MYSQLI_ASSOC) as $job) {
                         $jobId = $job['id'];
                         $jobTitle = htmlspecialchars($job['title']);
                         $location = htmlspecialchars($job['location']);
@@ -193,7 +208,7 @@ curl_close($curl);
             <iframe id="spotify-iframe" style="border-radius:12px"
                 src="https://open.spotify.com/embed/playlist/37i9dQZEVXbNG2KDcFcKOF?utm_source=generator"
                 frameBorder="0" allowfullscreen=""
-                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                allow="autoplay; clipboard-write; encrypted-media; picture-in-picture"
                 loading="lazy"></iframe>
         </section>
 
@@ -232,7 +247,7 @@ curl_close($curl);
 
         // Observe sections for fade-in on scroll
         document.addEventListener('DOMContentLoaded', () => {
-            const sections = document.querySelectorAll('#application-section, #application2-section, #job-info-section, #playlist-section');
+            const sections = document.querySelectorAll('#application2-section, #job-info-section, #playlist-section');
             sections.forEach(section => {
                 section.style.opacity = '0';
                 section.style.transform = 'translateY(30px)';
