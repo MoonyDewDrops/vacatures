@@ -173,14 +173,13 @@
 
     #filter-menu {
       position: absolute;
-      top: 60px;
-      right: 0;
+      top: 120px;
       background: white;
       border: 3px solid black;
       padding: 15px;
       z-index: 1000;
       min-width: 200px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.411);
     }
 
     #filter-menu p {
@@ -204,6 +203,10 @@
       background: #f0f0f0;
       color: #ff8f1c;
       padding-left: 15px;
+    }
+
+    .filter-option:hover{
+      color: #ff8f1c;
     }
 
     #job-slider-container {
