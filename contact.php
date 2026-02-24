@@ -97,6 +97,8 @@
                         }
                         ?>
                     </select>
+                    <label class="input-label" for="file">Motivatiebrief</label>
+                    <input id="form-file-inp" name="file" type="file" required>
                     <label class="input-label" for="file">CV*</label>
                     <input id="form-file-inp" name="file" type="file" required>
                     <p class="file-size-note">Toegestaan: PDF, DOC, DOCX, TXT, RTF. Maximale bestandsgrootte: 1GB</p>
