@@ -78,6 +78,7 @@
                     <p id="contact-title">Vul ons</p>
                     <p id="contact-title2">Formulier in!</p>
                     <p id="contact-title-text">Vul het contactformulier in en we komen snel bij je terug!</p>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1416.5519395751414!2d5.107446026826466!3d52.076906870207495!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c6658b39d11917%3A0xc4aaed9051c276c!2sGrafisch%20Lyceum%20Utrecht!5e0!3m2!1snl!2snl!4v1773133397997!5m2!1snl!2snl" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
                 <form action="/vacatures/send-form.php" enctype="multipart/form-data" method="POST" id="contact-form">
                     <label class="input-label" for="name">Wat is je naam?*</label>
