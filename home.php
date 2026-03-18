@@ -168,6 +168,7 @@ curl_close($curl);
         </section>
 
         <section id="jobs-section">
+            <h2>Vacatures:</h2>
             <div id="jobs-slide-menu">
                 <?php 
                 // Get jobs from database
