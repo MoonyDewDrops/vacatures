@@ -42,7 +42,7 @@ curl_close($curl);
             </div>
             <img id="pointer-circle" src="/vacatures/assets/img/home/test.png" alt="test">
         </section>
-<br><br>
+        <br><br>
 
         <section id="application-section">
             <div id="apply-content">
@@ -58,17 +58,17 @@ curl_close($curl);
                 </ul>
                 <br>
                 <p>Bij het starten van Het Bureau zit je in een bepaald Level.</p>
-            
+
                 <div id="levels-container">
-                  <a id="levels-link-btn" style="border-color:#9B534D">
-                    <p>Junior</p>
-                  </a> <br>
-                  <a id="levels-link-btn" style="border-color:#3F6F54">
-                    <p>Medior</p>
-                  </a>
-                  <a id="levels-link-btn" style="border-color:#755B48">
-                    <p>Senior</p>
-                  </a>
+                    <a id="levels-link-btn" style="border-color:#9B534D">
+                        <p>Junior</p>
+                    </a> <br>
+                    <a id="levels-link-btn" style="border-color:#3F6F54">
+                        <p>Medior</p>
+                    </a>
+                    <a id="levels-link-btn" style="border-color:#755B48">
+                        <p>Senior</p>
+                    </a>
                 </div>
 
                 <!-- <a id="levels-link-btn" href="#">
@@ -170,11 +170,11 @@ curl_close($curl);
         <section id="jobs-section">
             <h2>Vacatures:</h2>
             <div id="jobs-slide-menu">
-                <?php 
+                <?php
                 // Get jobs from database
                 require_once 'db_connect.php';
                 $result = $conn->query("SELECT * FROM bureau_vacatures ORDER BY id");
-                
+
                 if ($result && $result->num_rows > 0) {
                     foreach ($result->fetch_all(MYSQLI_ASSOC) as $job) {
                         $jobId = $job['id'];
@@ -183,20 +183,20 @@ curl_close($curl);
                         $jobType = htmlspecialchars($job['type']);
                         $imageUrl = !empty($job['image']) ? '/vacatures' . htmlspecialchars($job['image']) : '/vacatures/assets/img/placeholder.png';
                 ?>
-                    <div class="job-card">
-                        <img class="job-img" src="<?php echo htmlspecialchars($imageUrl); ?>" alt="<?php echo htmlspecialchars($jobTitle); ?>" width="220px">
-                        <p class="job-title"><?php echo htmlspecialchars($jobTitle); ?></p>
-                        <p class="job-loc"><?php echo htmlspecialchars($location); ?></p>
-                        <a href="/vacatures/vacature?id=<?php echo $jobId; ?>">
-                            <svg width="90" height="90" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M76.365 47.6513C77.068 46.9481 77.463 45.9944 77.463 45.0001C77.463 44.0057 77.068 43.052 76.365 42.3488L55.1513 21.1351C54.8053 20.7769 54.3915 20.4912 53.934 20.2947C53.4765 20.0982 52.9844 19.9947 52.4865 19.9904C51.9886 19.986 51.4948 20.0809 51.0339 20.2695C50.5731 20.458 50.1544 20.7365 49.8023 21.0886C49.4502 21.4407 49.1717 21.8594 48.9832 22.3202C48.7946 22.7811 48.6997 23.2749 48.7041 23.7728C48.7084 24.2707 48.8118 24.7628 49.0084 25.2203C49.2049 25.6778 49.4906 26.0916 49.8488 26.4376L64.6613 41.2501L15 41.2501C14.0054 41.2501 13.0516 41.6452 12.3484 42.3484C11.6451 43.0517 11.25 44.0055 11.25 45.0001C11.25 45.9946 11.6451 46.9485 12.3484 47.6517C13.0516 48.355 14.0054 48.7501 15 48.7501L64.6613 48.7501L49.8488 63.5626C49.1657 64.2698 48.7877 65.2171 48.7962 66.2003C48.8048 67.1836 49.1992 68.1241 49.8944 68.8194C50.5897 69.5147 51.5303 69.909 52.5135 69.9176C53.4967 69.9261 54.444 69.5482 55.1513 68.8651L76.365 47.6513Z"
-                                    fill="black" />
-                            </svg>
+                        <a href="/vacatures/vacature?id=<?php echo $jobId; ?>" style="text-decoration: none; color: inherit;">
+                            <div class="job-card">
+                                <img class="job-img" src="<?php echo htmlspecialchars($imageUrl); ?>" alt="<?php echo htmlspecialchars($jobTitle); ?>" width="220px">
+                                <p class="job-title"><?php echo htmlspecialchars($jobTitle); ?></p>
+                                <p class="job-loc"><?php echo htmlspecialchars($location); ?></p>
+                                <svg width="90" height="90" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M76.365 47.6513C77.068 46.9481 77.463 45.9944 77.463 45.0001C77.463 44.0057 77.068 43.052 76.365 42.3488L55.1513 21.1351C54.8053 20.7769 54.3915 20.4912 53.934 20.2947C53.4765 20.0982 52.9844 19.9947 52.4865 19.9904C51.9886 19.986 51.4948 20.0809 51.0339 20.2695C50.5731 20.458 50.1544 20.7365 49.8023 21.0886C49.4502 21.4407 49.1717 21.8594 48.9832 22.3202C48.7946 22.7811 48.6997 23.2749 48.7041 23.7728C48.7084 24.2707 48.8118 24.7628 49.0084 25.2203C49.2049 25.6778 49.4906 26.0916 49.8488 26.4376L64.6613 41.2501L15 41.2501C14.0054 41.2501 13.0516 41.6452 12.3484 42.3484C11.6451 43.0517 11.25 44.0055 11.25 45.0001C11.25 45.9946 11.6451 46.9485 12.3484 47.6517C13.0516 48.355 14.0054 48.7501 15 48.7501L64.6613 48.7501L49.8488 63.5626C49.1657 64.2698 48.7877 65.2171 48.7962 66.2003C48.8048 67.1836 49.1992 68.1241 49.8944 68.8194C50.5897 69.5147 51.5303 69.909 52.5135 69.9176C53.4967 69.9261 54.444 69.5482 55.1513 68.8651L76.365 47.6513Z"
+                                        fill="black" />
+                                </svg>
+                                <p class="job-availability"><?php echo htmlspecialchars($jobType); ?></p>
+                            </div>
                         </a>
-                        <p class="job-availability"><?php echo htmlspecialchars($jobType); ?></p>
-                    </div>
-                <?php 
+                <?php
                     }
                 } else {
                     echo '<p style="padding: 20px; text-align: center;">Geen vacatures beschikbaar.</p>';
@@ -215,11 +215,11 @@ curl_close($curl);
 
     </main>
     <?php include "assets/php/footer.php"; ?>
-    
+
     <script>
         // Smooth scroll for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
+            anchor.addEventListener('click', function(e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
