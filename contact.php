@@ -14,61 +14,61 @@
 <body>
     <?php include "assets/php/header.php"; ?>
     <main>
-        <?php if(isset($_GET['error'])): ?>
-        <div id="error-message">
-            <div class="error-content">
-                <svg width="60" height="60" viewBox="0 0 24 24" fill="none">
-                    <circle cx="12" cy="12" r="10" stroke="#dc3545" stroke-width="2"/>
-                    <path d="M15 9l-6 6M9 9l6 6" stroke="#dc3545" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-                <h2>Er ging iets mis!</h2>
-                <p>
-                    <?php
-                    $error = $_GET['error'];
-                    switch($error) {
-                        case 'missing_fields':
-                            echo 'Vul alle verplichte velden in.';
-                            break;
-                        case 'invalid_email':
-                            echo 'Voer een geldig e-mailadres in.';
-                            break;
-                        case 'field_too_long':
-                            echo 'Een of meer velden zijn te lang.';
-                            break;
-                        case 'file_too_large':
-                            echo 'Het bestand is te groot (maximaal 10MB).';
-                            break;
-                        case 'invalid_file_type':
-                            echo 'Ongeldig bestandstype. Toegestaan: PDF, DOC, DOCX, TXT, RTF.';
-                            break;
-                        case 'upload_failed':
-                            echo 'Het uploaden van het bestand is mislukt. Probeer het opnieuw.';
-                            break;
-                        case 'database_error':
-                            echo 'Er is een technische fout opgetreden. Probeer het later opnieuw.';
-                            break;
-                        default:
-                            echo 'Er is een onbekende fout opgetreden.';
-                    }
-                    ?>
-                </p>
-                <button onclick="closeErrorMessage()" class="close-btn error-btn">Sluiten</button>
+        <?php if (isset($_GET['error'])): ?>
+            <div id="error-message">
+                <div class="error-content">
+                    <svg width="60" height="60" viewBox="0 0 24 24" fill="none">
+                        <circle cx="12" cy="12" r="10" stroke="#dc3545" stroke-width="2" />
+                        <path d="M15 9l-6 6M9 9l6 6" stroke="#dc3545" stroke-width="2" stroke-linecap="round" />
+                    </svg>
+                    <h2>Er ging iets mis!</h2>
+                    <p>
+                        <?php
+                        $error = $_GET['error'];
+                        switch ($error) {
+                            case 'missing_fields':
+                                echo 'Vul alle verplichte velden in.';
+                                break;
+                            case 'invalid_email':
+                                echo 'Voer een geldig e-mailadres in.';
+                                break;
+                            case 'field_too_long':
+                                echo 'Een of meer velden zijn te lang.';
+                                break;
+                            case 'file_too_large':
+                                echo 'Het bestand is te groot (maximaal 10MB).';
+                                break;
+                            case 'invalid_file_type':
+                                echo 'Ongeldig bestandstype. Toegestaan: PDF, DOC, DOCX, TXT, RTF.';
+                                break;
+                            case 'upload_failed':
+                                echo 'Het uploaden van het bestand is mislukt. Probeer het opnieuw.';
+                                break;
+                            case 'database_error':
+                                echo 'Er is een technische fout opgetreden. Probeer het later opnieuw.';
+                                break;
+                            default:
+                                echo 'Er is een onbekende fout opgetreden.';
+                        }
+                        ?>
+                    </p>
+                    <button onclick="closeErrorMessage()" class="close-btn error-btn">Sluiten</button>
+                </div>
             </div>
-        </div>
         <?php endif; ?>
-        
-        <?php if(isset($_GET['success']) && $_GET['success'] === 'true'): ?>
-        <div id="success-message">
-            <div class="success-content">
-                <svg width="60" height="60" viewBox="0 0 24 24" fill="none">
-                    <circle cx="12" cy="12" r="10" stroke="#28a745" stroke-width="2"/>
-                    <path d="M8 12l2 2 4-4" stroke="#28a745" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-                <h2>Formulier Succesvol Verzonden!</h2>
-                <p>Bedankt voor je bericht. We nemen zo snel mogelijk contact met je op.</p>
-                <button onclick="closeSuccessMessage()" class="close-btn">Sluiten</button>
+
+        <?php if (isset($_GET['success']) && $_GET['success'] === 'true'): ?>
+            <div id="success-message">
+                <div class="success-content">
+                    <svg width="60" height="60" viewBox="0 0 24 24" fill="none">
+                        <circle cx="12" cy="12" r="10" stroke="#28a745" stroke-width="2" />
+                        <path d="M8 12l2 2 4-4" stroke="#28a745" stroke-width="2" stroke-linecap="round" />
+                    </svg>
+                    <h2>Formulier Succesvol Verzonden!</h2>
+                    <p>Bedankt voor je bericht. We nemen zo snel mogelijk contact met je op.</p>
+                    <button onclick="closeSuccessMessage()" class="close-btn">Sluiten</button>
+                </div>
             </div>
-        </div>
         <?php endif; ?>
         <section id="banner-section">
         </section>
@@ -80,31 +80,56 @@
                     <p id="contact-title-text">Vul het contactformulier in en we komen snel bij je terug!</p>
                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1416.5519395751414!2d5.107446026826466!3d52.076906870207495!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c6658b39d11917%3A0xc4aaed9051c276c!2sGrafisch%20Lyceum%20Utrecht!5e0!3m2!1snl!2snl!4v1773133397997!5m2!1snl!2snl" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
-                <form action="/vacatures/send-form.php" enctype="multipart/form-data" method="POST" id="contact-form">
-                    <label class="input-label" for="name">Wat is je naam?*</label>
-                    <input class="form-text-inp" name="naam" type="text" placeholder="Volledige naam" required>
-                    <label class="input-label" for="contact">Wat is je e-mail*</label>
-                    <input class="form-text-inp" name="email" type="email" placeholder="janwillem@voorbeeld.com" required>
-                    <label class="input-label" for="job">Om welke vacature gaat het?*</label>
-                    <select class="form-text-inp" name="vacature" required>
-                        <option value="">Selecteer een vacature</option>
-                        <?php
-                        require_once 'db_connect.php';
-                        $result = $conn->query("SELECT id, title FROM bureau_vacatures ORDER BY title ASC");
-                        if ($result && $result->num_rows > 0) {
-                            while ($job = $result->fetch_assoc()) {
-                                echo '<option value="' . htmlspecialchars($job['title']) . '">' . htmlspecialchars($job['title']) . '</option>';
+                <form action="/vacatures/send-form.php" enctype="multipart/form-data" method="POST" id="contact-form" novalidate>
+
+                    <div id="input-group">
+                        <label class="input-label" for="name">Wat is je naam?*</label>
+                        <input class="form-text-inp" name="naam" type="text" placeholder="Volledige naam" required>
+                        <div id="name-error" class="error-message"></div>
+                    </div>
+
+                    <div id="input-group">
+                        <label class="input-label" for="contact">Wat is je e-mail*</label>
+                        <input class="form-text-inp" name="email" type="email" placeholder="janwillem@voorbeeld.com" required>
+                        <div id="name-error" class="error-message"></div>
+                    </div>
+
+                    <div id="input-group">
+                        <label class="input-label" for="job">Om welke vacature gaat het?*</label>
+                        <select class="form-text-inp" name="vacature" required>
+                            <option value="">Selecteer een vacature</option>
+                            <?php
+                            require_once 'db_connect.php';
+                            $result = $conn->query("SELECT id, title FROM bureau_vacatures ORDER BY title ASC");
+                            if ($result && $result->num_rows > 0) {
+                                while ($job = $result->fetch_assoc()) {
+                                    echo '<option value="' . htmlspecialchars($job['title']) . '">' . htmlspecialchars($job['title']) . '</option>';
+                                }
                             }
-                        }
-                        ?>
-                    </select>
-                    <label class="input-label" for="file">Motivatiebrief</label>
-                    <input id="form-file-inp" name="file" type="file" required>
-                    <label class="input-label" for="file">CV*</label>
-                    <input id="form-file-inp" name="file" type="file" required>
-                    <p class="file-size-note">Toegestaan: PDF, DOC, DOCX, TXT, RTF. Maximale bestandsgrootte: 1GB</p>
-                    <label class="input-label" for="comment">Opmerking?*</label>
-                    <textarea class="form-textarea" name="descriptie" id="" placeholder="Opmerking..."></textarea>
+                            ?>
+                        </select>
+                        <div id="name-error" class="error-message"></div>
+                    </div>
+
+                    <div id="input-group">
+                        <label class="input-label" for="file">Motivatiebrief</label>
+                        <input id="form-file-inp" name="file" type="file" required>
+                        <div id="name-error" class="error-message"></div>
+                    </div>
+
+                    <div id="input-group">
+                        <label class="input-label" for="file">CV*</label>
+                        <input id="form-file-inp" name="file" type="file" required>
+                        <p class="file-size-note">Toegestaan: PDF, DOC, DOCX, TXT, RTF. Maximale bestandsgrootte: 1GB</p>
+                        <div id="name-error" class="error-message"></div>
+                    </div>
+
+                    <div id="input-group">
+                        <label class="input-label" for="comment">Opmerking?*</label>
+                        <textarea class="form-textarea" name="descriptie" id="" placeholder="Opmerking..." required></textarea>
+                        <div id="name-error" class="error-message"></div>
+                    </div>
+
                     <button id="form-submit" type="submit" name="stuur-form">Verstuur<svg width="75" height="6" viewBox="0 0 91 6"
                             fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M0 3H91" stroke="black" stroke-width="5" />
@@ -114,7 +139,7 @@
         </section>
     </main>
     <?php include "assets/php/footer.php"; ?>
-    
+
     <script>
         function closeSuccessMessage() {
             const successMsg = document.getElementById('success-message');
@@ -125,7 +150,7 @@
                 window.history.replaceState({}, document.title, 'contact');
             }, 300);
         }
-        
+
         function closeErrorMessage() {
             const errorMsg = document.getElementById('error-message');
             errorMsg.style.animation = 'fadeOut 0.3s ease-out';
@@ -135,27 +160,27 @@
                 window.history.replaceState({}, document.title, 'contact');
             }, 300);
         }
-        
+
         // Auto close after 5 seconds
-        if(document.getElementById('success-message')) {
+        if (document.getElementById('success-message')) {
             setTimeout(closeSuccessMessage, 5000);
         }
-        
+
         // Auto close error after 8 seconds
-        if(document.getElementById('error-message')) {
+        if (document.getElementById('error-message')) {
             setTimeout(closeErrorMessage, 8000);
         }
-        
+
         // Auto-fill job title from URL parameter
         const urlParams = new URLSearchParams(window.location.search);
         const jobParam = urlParams.get('job');
-        if(jobParam) {
+        if (jobParam) {
             const vacatureSelect = document.querySelector('select[name="vacature"]');
-            if(vacatureSelect) {
+            if (vacatureSelect) {
                 const decodedJob = decodeURIComponent(jobParam);
                 // Find and select the matching option
-                for(let option of vacatureSelect.options) {
-                    if(option.value === decodedJob) {
+                for (let option of vacatureSelect.options) {
+                    if (option.value === decodedJob) {
                         option.selected = true;
                         break;
                     }
