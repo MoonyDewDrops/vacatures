@@ -3,51 +3,9 @@ include 'auth_check.php';
 include '../db_connect.php';
 include 'includes/activity_log.php';
 
-// Check if status column exists, if not add it
-$columnCheck = $conn->query("SHOW COLUMNS FROM bureau_sollicitaties LIKE 'status'");
-if($columnCheck->num_rows === 0) {
-    $conn->query("ALTER TABLE bureau_sollicitaties ADD COLUMN status ENUM('pending', 'accepted', 'rejected') DEFAULT 'pending' AFTER descriptie");
-}
+include 'includes/submission_status.php';
 
-// Handle Status Update
-if(isset($_GET['accept'])) {
-    $id = intval($_GET['accept']);
-    $stmt = $conn->prepare("UPDATE bureau_sollicitaties SET status = 'accepted' WHERE id = ?");
-    $stmt->bind_param('i', $id);
-    if($stmt->execute()) {
-        $subInfo = $conn->query("SELECT naam, vacature FROM bureau_sollicitaties WHERE id = $id")->fetch_assoc();
-        logActivity($conn, 'update', 'sollicitatie', $id, ($subInfo['naam'] ?? '') . ' - Geaccepteerd');
-    }
-    $stmt->close();
-    header('Location: submissions?success=accepted');
-    exit;
-}
-
-if(isset($_GET['reject'])) {
-    $id = intval($_GET['reject']);
-    $stmt = $conn->prepare("UPDATE bureau_sollicitaties SET status = 'rejected' WHERE id = ?");
-    $stmt->bind_param('i', $id);
-    if($stmt->execute()) {
-        $subInfo = $conn->query("SELECT naam, vacature FROM bureau_sollicitaties WHERE id = $id")->fetch_assoc();
-        logActivity($conn, 'update', 'sollicitatie', $id, ($subInfo['naam'] ?? '') . ' - Afgewezen');
-    }
-    $stmt->close();
-    header('Location: submissions?success=rejected');
-    exit;
-}
-
-if(isset($_GET['pending'])) {
-    $id = intval($_GET['pending']);
-    $stmt = $conn->prepare("UPDATE bureau_sollicitaties SET status = 'pending' WHERE id = ?");
-    $stmt->bind_param('i', $id);
-    if($stmt->execute()) {
-        $subInfo = $conn->query("SELECT naam, vacature FROM bureau_sollicitaties WHERE id = $id")->fetch_assoc();
-        logActivity($conn, 'update', 'sollicitatie', $id, ($subInfo['naam'] ?? '') . ' - Terug naar In Behandeling');
-    }
-    $stmt->close();
-    header('Location: submissions?success=pending');
-    exit;
-}
+handleSubmissionStatusRequest($conn);
 
 // Handle Delete
 if(isset($_GET['delete'])) {
@@ -68,7 +26,7 @@ if(isset($_GET['delete'])) {
         logActivity($conn, 'delete', 'sollicitatie', $id, $subName);
     }
     $stmt->close();
-    header('Location: submissions.php?success=deleted');
+    header('Location: submissions?success=deleted');
     exit;
 }
 
@@ -95,6 +53,25 @@ $countAll = $conn->query("SELECT COUNT(*) as count FROM bureau_sollicitaties")->
 $countPending = $conn->query("SELECT COUNT(*) as count FROM bureau_sollicitaties WHERE status = 'pending' OR status IS NULL")->fetch_assoc()['count'];
 $countAccepted = $conn->query("SELECT COUNT(*) as count FROM bureau_sollicitaties WHERE status = 'accepted'")->fetch_assoc()['count'];
 $countRejected = $conn->query("SELECT COUNT(*) as count FROM bureau_sollicitaties WHERE status = 'rejected'")->fetch_assoc()['count'];
+function submissionStatusMessage(): ?string
+{
+    if (!isset($_GET['success'])) {
+        return null;
+    }
+    $emailNote = getEmailStatusNote();
+    switch ($_GET['success']) {
+        case 'deleted':
+            return 'Inzending succesvol verwijderd!';
+        case 'accepted':
+            return 'Sollicitatie geaccepteerd!' . $emailNote;
+        case 'rejected':
+            return 'Sollicitatie afgewezen.' . $emailNote;
+        case 'pending':
+            return 'Sollicitatie teruggezet naar In Behandeling.';
+        default:
+            return 'Actie succesvol uitgevoerd!';
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="nl">
@@ -114,29 +91,12 @@ $countRejected = $conn->query("SELECT COUNT(*) as count FROM bureau_sollicitatie
         <main class="admin-content">
             <div class="page-header">
                 <h1>Formulier Inzendingen</h1>
+                <a href="mail-test" class="btn-secondary">E-mail testen</a>
             </div>
-            
-            <?php if(isset($_GET['success'])): ?>
-                <div class="success-message">
-                    <?php 
-                    switch($_GET['success']) {
-                        case 'deleted':
-                            echo 'Inzending succesvol verwijderd!';
-                            break;
-                        case 'accepted':
-                            echo 'Sollicitatie geaccepteerd!';
-                            break;
-                        case 'rejected':
-                            echo 'Sollicitatie afgewezen.';
-                            break;
-                        case 'pending':
-                            echo 'Sollicitatie teruggezet naar In Behandeling.';
-                            break;
-                        default:
-                            echo 'Actie succesvol uitgevoerd!';
-                    }
-                    ?>
-                </div>
+
+            <?php $statusMessage = submissionStatusMessage(); ?>
+            <?php if($statusMessage): ?>
+                <div class="success-message"><?php echo htmlspecialchars($statusMessage); ?></div>
             <?php endif; ?>
             
             <!-- Filter Tabs -->
@@ -176,12 +136,13 @@ $countRejected = $conn->query("SELECT COUNT(*) as count FROM bureau_sollicitatie
                                     $statusColor = $status === 'accepted' ? '#27ae60' : ($status === 'rejected' ? '#e74c3c' : '#f39c12');
                                     $statusText = $status === 'accepted' ? 'Geaccepteerd' : ($status === 'rejected' ? 'Afgewezen' : 'In Behandeling');
                                     $statusIcon = $status === 'accepted' ? '✅' : ($status === 'rejected' ? '❌' : '⏳');
+                                    $viewUrl = 'submission-view?id=' . (int)$sub['id'];
                                 ?>
-                                <tr>
+                                <tr class="submission-row" data-href="<?php echo htmlspecialchars($viewUrl); ?>">
                                     <td><?php echo $sub['id']; ?></td>
                                     <td style="white-space: nowrap;"><?php echo date('d-m-Y', strtotime($sub['datum'])); ?></td>
                                     <td class="truncate-cell" title="<?php echo htmlspecialchars($sub['naam']); ?>"><?php echo htmlspecialchars($sub['naam']); ?></td>
-                                    <td class="truncate-cell" title="<?php echo htmlspecialchars($sub['email']); ?>"><a href="mailto:<?php echo $sub['email']; ?>"><?php echo htmlspecialchars($sub['email']); ?></a></td>
+                                    <td class="truncate-cell" title="<?php echo htmlspecialchars($sub['email']); ?>"><a href="mailto:<?php echo htmlspecialchars($sub['email']); ?>" onclick="event.stopPropagation();"><?php echo htmlspecialchars($sub['email']); ?></a></td>
                                     <td class="truncate-cell" title="<?php echo htmlspecialchars($sub['vacature']); ?>"><?php echo htmlspecialchars($sub['vacature']); ?></td>
                                     <td>
                                         <span class="badge" style="background: <?php echo $statusColor; ?>; white-space: nowrap;">
@@ -189,17 +150,17 @@ $countRejected = $conn->query("SELECT COUNT(*) as count FROM bureau_sollicitatie
                                         </span>
                                     </td>
                                     <td class="actions">
-                                        <a href="submission-view?id=<?php echo $sub['id']; ?>" class="btn-small style="color: #e67e22;">Bekijk</a>
+                                        <a href="<?php echo htmlspecialchars($viewUrl); ?>" class="btn-small" style="background: #3498db;" onclick="event.stopPropagation();">Bekijk</a>
                                         <?php if($status !== 'accepted'): ?>
-                                            <a href="submissions?accept=<?php echo $sub['id']; ?>" class="btn-small" style="background: #27ae60;" onclick="return confirm('Accepteren?');">Accept</a>
+                                            <a href="submissions?accept=<?php echo $sub['id']; ?>" class="btn-small" style="background: #27ae60;" onclick="event.stopPropagation(); return confirm('Accepteren? De sollicitant ontvangt een e-mail.');">Accept</a>
                                         <?php endif; ?>
                                         <?php if($status !== 'rejected'): ?>
-                                            <a href="submissions?reject=<?php echo $sub['id']; ?>" class="btn-small" style="background: #e67e22;" onclick="return confirm('Afwijzen?');">Afwijzen</a>
+                                            <a href="submissions?reject=<?php echo $sub['id']; ?>" class="btn-small" style="background: #e67e22;" onclick="event.stopPropagation(); return confirm('Afwijzen? De sollicitant ontvangt een e-mail.');">Afwijzen</a>
                                         <?php endif; ?>
                                         <?php if($status !== 'pending'): ?>
-                                            <a href="submissions?pending=<?php echo $sub['id']; ?>" class="btn-small" style="background: #7f8c8d;" onclick="return confirm('Terugzetten?');">Reset</a>
+                                            <a href="submissions?pending=<?php echo $sub['id']; ?>" class="btn-small" style="background: #7f8c8d;" onclick="event.stopPropagation(); return confirm('Terugzetten?');">Reset</a>
                                         <?php endif; ?>
-                                        <a href="#" class="btn-small" style="background: #c0392b;" onclick="if(confirm('Verwijderen?')) { window.location.href='submissions?delete=<?php echo $sub['id']; ?>'; } return false;">Verwijder</a>
+                                        <a href="#" class="btn-small" style="background: #c0392b;" onclick="event.stopPropagation(); if(confirm('Verwijderen?')) { window.location.href='submissions?delete=<?php echo $sub['id']; ?>'; } return false;">Verwijder</a>
                                     </td>
                                 </tr>
                             <?php endwhile; ?>
@@ -213,5 +174,13 @@ $countRejected = $conn->query("SELECT COUNT(*) as count FROM bureau_sollicitatie
             </div>
         </main>
     </div>
+    <script>
+        document.querySelectorAll('tr.submission-row[data-href]').forEach(function(row) {
+            row.addEventListener('click', function(e) {
+                if (e.target.closest('a')) return;
+                window.location.href = row.getAttribute('data-href');
+            });
+        });
+    </script>
 </body>
 </html>

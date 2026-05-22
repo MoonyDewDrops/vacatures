@@ -1,19 +1,19 @@
 /* Modern Admin - Bureau Jobs */
 
 @font-face {
-  font-family: "Buroto";
-  src: url("../../assets/fonts/buroto-fonts/buroto/BurotoRegular.woff2") format("woff2");
+    font-family: "Buroto";
+    src: url("../../assets/fonts/buroto-fonts/buroto/BurotoRegular.woff2") format("woff2");
 }
 
 @font-face {
-  font-family: "Buroto-Wide";
-  src: url("../../assets/fonts/buroto-fonts/buroto-wide/BurotoWide.woff2") format("woff2");
+    font-family: "Buroto-Wide";
+    src: url("../../assets/fonts/buroto-fonts/buroto-wide/BurotoWide.woff2") format("woff2");
 }
 
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
@@ -108,7 +108,11 @@ body {
 }
 
 /* Buttons */
-.btn-primary, .btn-secondary, .btn-small, .btn-edit, .btn-delete {
+.btn-primary,
+.btn-secondary,
+.btn-small,
+.btn-edit,
+.btn-delete {
     padding: 12px 24px;
     border: none;
     border-radius: 24px;
@@ -592,72 +596,114 @@ tbody tr:last-child td {
     border-top: 1px solid #282828;
 }
 
+.file-preview {
+    margin-top: 12px;
+    border: 1px solid #282828;
+    border-radius: 6px;
+    overflow: hidden;
+    background: #0a0a0a;
+}
+
+.file-preview iframe {
+    width: 100%;
+    height: 520px;
+    border: 0;
+    display: block;
+}
+
+.file-preview-meta {
+    padding: 10px 14px;
+    background: #1a1a1a;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.status-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-right: auto;
+}
+
+tr.submission-row { cursor: pointer; }
+tr.submission-row:hover td { background: rgba(255, 143, 28, 0.08); }
+tr.submission-row .actions { cursor: default; }
+tr.submission-row .actions a { cursor: pointer; }
+
 /* Responsive */
 @media (max-width: 768px) {
     .admin-container {
         flex-direction: column;
     }
-    
+
     .admin-sidebar {
         width: 100%;
         min-height: auto;
         padding: 16px 0;
     }
-    
+
     .admin-content {
         padding: 16px;
     }
-    
+
     .page-header h1 {
         font-size: 24px;
     }
-    
+
     .form-row {
         grid-template-columns: 1fr;
     }
-    
+
     .stats-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .login-box {
         padding: 32px 24px;
     }
-    
+
     /* Header responsive */
     .admin-header {
         padding: 12px 16px;
     }
-    
+
     .header-content {
         flex-wrap: wrap;
         gap: 12px;
     }
-    
+
     .header-right {
         gap: 12px;
     }
-    
+
     .user-info {
         display: none;
     }
-    
+
     /* Buttons responsive */
-    .btn-primary, .btn-secondary, .btn-small, .btn-edit, .btn-delete {
+    .btn-primary,
+    .btn-secondary,
+    .btn-small,
+    .btn-edit,
+    .btn-delete {
         padding: 10px 20px;
         font-size: 13px;
     }
-    
+
     .btn-small {
         padding: 6px 12px;
         font-size: 12px;
     }
-    
+
     /* Form actions wrap */
-    .form-actions, .detail-actions {
+    .form-actions,
+    .detail-actions {
         flex-wrap: wrap;
     }
-    
+
     .form-actions .btn-primary,
     .form-actions .btn-secondary,
     .detail-actions .btn-primary,
@@ -666,67 +712,69 @@ tbody tr:last-child td {
         min-width: 120px;
         text-align: center;
     }
-    
+
     /* Table responsive */
     .table-container {
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
     }
-    
+
     table {
         min-width: 700px;
     }
-    
-    th, td {
+
+    th,
+    td {
         padding: 10px 8px;
         font-size: 12px;
     }
-    
+
     .truncate-cell {
         max-width: 100px;
     }
-    
+
     /* Action buttons stack on mobile */
     .actions {
         flex-wrap: wrap;
         gap: 4px;
     }
-    
+
     .actions .btn-small {
         padding: 5px 8px;
         font-size: 11px;
     }
-    
+
     /* Filter tabs wrap */
     .filter-tabs {
         flex-wrap: wrap;
     }
-    
+
     .filter-tab {
         font-size: 12px !important;
         padding: 8px 12px !important;
     }
-    
+
     /* Section spacing */
     .section {
         padding: 16px;
     }
-    
-    .form-container, .detail-card {
+
+    .form-container,
+    .detail-card {
         padding: 20px;
     }
-    
+
     /* Detail header stack */
     .detail-header {
         flex-direction: column;
         align-items: flex-start;
         gap: 12px;
     }
-    
+
     .stat-card {
         padding: 16px;
     }
-    
+
     .stat-content h3 {
         font-size: 28px;
     }
@@ -736,36 +784,37 @@ tbody tr:last-child td {
     .admin-header {
         padding: 10px 12px;
     }
-    
+
     .logo h2 {
         font-size: 16px;
     }
-    
+
     .btn-logout {
         padding: 6px 12px;
         font-size: 12px;
     }
-    
+
     .page-header h1 {
         font-size: 20px;
     }
-    
+
     .section h2 {
         font-size: 18px;
     }
-    
+
     .form-group input,
     .form-group select,
     .form-group textarea {
         padding: 10px 12px;
         font-size: 13px;
     }
-    
+
     table {
         min-width: 500px;
     }
-    
-    th, td {
+
+    th,
+    td {
         padding: 8px 10px;
         font-size: 12px;
     }
